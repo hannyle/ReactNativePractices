@@ -10,22 +10,19 @@ export default class App extends React.Component {
     this.state = {product: '', amount:'', shoplist: []};
   }
 
-  componentDidMount() {
-    // Create course table
+  componentDidMount() {   
     db.transaction(tx => {
       tx.executeSql('create table if not exists shop (id integer primary key not null, product text, amount text);');
     });
     this.updateList();
   }
 
-  // Save shop
   saveItem = () => {
     db.transaction(tx => {
         tx.executeSql('insert into shop (product, amount) values (?, ?)', [this.state.product, this.state.amount]);    
       }, null, this.updateList)
   }
 
-  // Update courselist
   updateList = () => {
     db.transaction(tx => {
       tx.executeSql('select * from shop', [], (_, { rows }) =>
@@ -35,7 +32,6 @@ export default class App extends React.Component {
     
   }
 
-  // Delete course
   deleteItem = (id) => {
     db.transaction(
       tx => {
