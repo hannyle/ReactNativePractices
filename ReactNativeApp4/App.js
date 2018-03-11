@@ -5,9 +5,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {text: '', data: []};
-    this.addData = this.addData.bind(this);
-    this.clearData = this.clearData.bind(this);
-  }
+    }
     addData = () => {
       this.setState({
         data: [...this.state.data, {key: this.state.text}]
